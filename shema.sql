@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS card_holder CASCADE;
 DROP TABLE IF EXISTS credit_card CASCADE;
-DROP TABLE IF EXISTS mechant_category CASCADE;
-DROP TABLE IF EXISTS mechant CASCADE;
+DROP TABLE IF EXISTS merchant_category CASCADE;
+DROP TABLE IF EXISTS merchant CASCADE;
 DROP TABLE IF EXISTS transaction CASCADE;
 
 -- Create card_holder table and insert values
@@ -18,18 +18,18 @@ CREATE TABLE credit_card (
 );
 
 
--- Create mechant_category table and insert values
-CREATE TABLE mechant_category (
+-- Create merchant_category table and insert values
+CREATE TABLE merchant_category (
   id INT PRIMARY KEY NOT NULL,
   category_name VARCHAR(255)
 );
 
--- Create mechant table and insert values
-CREATE TABLE mechant (
+-- Create merchant table and insert values
+CREATE TABLE merchant (
   id INT PRIMARY KEY NOT NULL,
   name VARCHAR(255),
-  mechant_category INTEGER,
-  FOREIGN KEY (mechant_category) REFERENCES mechant_category(id)
+  merchant_category INTEGER,
+  FOREIGN KEY (merchant_category) REFERENCES merchant_category(id)
 );
 
 -- Create transaction table and insert values
@@ -40,13 +40,11 @@ CREATE TABLE transaction (
   card INTEGER,
   id_merchant INTEGER,
   FOREIGN KEY (card) REFERENCES credit_card(card),
-  FOREIGN KEY (id_merchant) REFERENCES mechant(id)
+  FOREIGN KEY (id_merchant) REFERENCES merchant(id)
 );
-
 
 select * from card_holder;
 select * from credit_card;
-select * from mechant_category;
-select * from mechant;
+select * from merchant_category;
+select * from merchant;
 select * from transaction;
-
