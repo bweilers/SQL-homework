@@ -12,7 +12,7 @@ CREATE TABLE card_holder (
 
 -- Create credit_card table and insert values
 CREATE TABLE credit_card (
-  card INT PRIMARY KEY NOT NULL,
+  card VARCHAR(255) PRIMARY KEY NOT NULL,
   cardholder_id INTEGER, --OR SHOULD THIS BE FOREIGN KEY?
   FOREIGN KEY (cardholder_id) REFERENCES card_holder(id)
 );
@@ -21,23 +21,23 @@ CREATE TABLE credit_card (
 -- Create merchant_category table and insert values
 CREATE TABLE merchant_category (
   id INT PRIMARY KEY NOT NULL,
-  category_name VARCHAR(255)
+  name VARCHAR(255) --CORRECTED FOR CONVENTION FROM category_name
 );
 
 -- Create merchant table and insert values
 CREATE TABLE merchant (
   id INT PRIMARY KEY NOT NULL,
   name VARCHAR(255),
-  merchant_category INTEGER,
-  FOREIGN KEY (merchant_category) REFERENCES merchant_category(id)
+  id_merchant_category INTEGER,
+  FOREIGN KEY (id_merchant_category) REFERENCES merchant_category(id)
 );
 
 -- Create transaction table and insert values
 CREATE TABLE transaction (
   id INT PRIMARY KEY NOT NULL,
-  date VARCHAR(255),
-  amount INTEGER,
-  card INTEGER,
+  date TIMESTAMP NOT NULL,
+  amount FLOAT,
+  card VARCHAR(255),
   id_merchant INTEGER,
   FOREIGN KEY (card) REFERENCES credit_card(card),
   FOREIGN KEY (id_merchant) REFERENCES merchant(id)
